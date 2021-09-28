@@ -46,4 +46,4 @@ run_ssh "podman exec \
         -e PULL_REQUEST_PROCESSOR_HOME="${PULL_REQUEST_PROCESSOR_HOME}" \
         -e VERSION="${VERSION}" \
         -e COMPONENT_UPGRADE_LOGGER="${COMPONENT_UPGRADE_LOGGER}" \
-        -ti ${CONTAINER_NAME} '${BUILD_SCRIPT}' ${@}"
+        -ti ${CONTAINER_NAME} '${BUILD_SCRIPT}' $*"
