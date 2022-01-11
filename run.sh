@@ -28,10 +28,12 @@ add_parent_volume_if_provided() {
 }
 
 mount_tools_if_provided() {
- if [ -n "${TOOLS_DIR}" ]; then
+ if [ -d "${TOOLS_DIR}" ]; then
    if [ -n "${TOOLS_MOUNT}" ]; then
      echo "-v ${TOOLS_DIR}:${TOOLS_MOUNT}:ro"
    fi
+ else
+   echo "Warning: Provided tools dir ${TOOLS_DIR} does not exist, won't be added to container's volume."
  fi
 }
 
