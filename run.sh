@@ -14,6 +14,7 @@ readonly CONTAINER_SERVER_IP=${CONTAINER_SERVER_IP:-'10.88.0.1'}
 readonly TOOLS_DIR=${TOOLS_DIR:-'/opt'}
 readonly TOOLS_MOUNT=${TOOLS_MOUNT:-'/opt'}
 readonly PUBLISHED_PORTS=${PUBLISHED_PORTS:-''}
+readonly SYSTEMD_ENABLED=${SYSTEMD_ENABLED:-''}
 
 set -euo pipefail
 
