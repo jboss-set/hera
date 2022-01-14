@@ -34,6 +34,12 @@ add_ports_if_provided() {
  fi
 }
 
+systemd_if_enabled() {
+  if [ -n "${SYSTEMD_ENABLED}" ]; then
+    echo "--systemd=true --privileged=true"
+  fi
+}
+
 mount_tools_if_provided() {
  if [ -d "${TOOLS_DIR}" ]; then
    if [ -n "${TOOLS_MOUNT}" ]; then
@@ -63,8 +69,8 @@ readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 run_ssh "podman run \
             --userns=keep-id -u ${JENKINS_UID}:${JENKINS_GUID} \
             --name "${CONTAINER_TO_RUN_NAME}" \
-             --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
-            --rm $(add_parent_volume_if_provided) \
+            --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
+            --rm $(add_parent_volume_if_provided) $(systemd_if_enabled) \
             --workdir ${WORKSPACE} $(add_ports_if_provided) \
             -v "${JOB_DIR}":${WORKSPACE}:rw $(mount_tools_if_provided)\
             -v "${JENKINS_ACCOUNT_DIR}/.ssh/":/var/jenkins_home/.ssh/:rw \
