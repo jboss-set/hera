@@ -37,7 +37,7 @@ add_ports_if_provided() {
 
 systemd_if_enabled() {
   if [ -n "${SYSTEMD_ENABLED}" ]; then
-    echo "--systemd=true --privileged=true"
+    echo "--systemd=true --privileged=true -v /sys/fs/cgroup:/sys/fs/cgroup:ro"
   fi
 }
 
