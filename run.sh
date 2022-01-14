@@ -52,7 +52,7 @@ mount_tools_if_provided() {
 }
 
 container_user_if_enabled() {
-  if [ -n "${JENKINS_UID}" ]; then
+  if [ "${JENKINS_UID}" != "none" ]; then
     echo "--userns=keep-id -u ${JENKINS_UID}:${JENKINS_GUID}"
   fi
 }
