@@ -51,6 +51,13 @@ mount_tools_if_provided() {
  fi
 }
 
+container_user_if_enabled() {
+  if [ -n "${JENKINS_UID}" ]; then
+    echo "--userns=keep-id -u ${JENKINS_UID}:${JENKINS_GUID}"
+  fi
+}
+
+
 # shellcheck source=./library.sh
 source "${HERA_HOME}"/library.sh
 
@@ -68,8 +75,7 @@ readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 
 # shellcheck disable=SC2016
 run_ssh "podman run \
-            --userns=keep-id -u ${JENKINS_UID}:${JENKINS_GUID} \
-            --name "${CONTAINER_TO_RUN_NAME}" \
+            --name "${CONTAINER_TO_RUN_NAME}" $(container_user_if_enabled) \
             --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
             --rm $(add_parent_volume_if_provided) $(systemd_if_enabled) \
             --workdir ${WORKSPACE} $(add_ports_if_provided) \
