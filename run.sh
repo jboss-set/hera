@@ -99,5 +99,5 @@ run_ssh "podman run \
             -v "${JENKINS_ACCOUNT_DIR}/.ssh/":/var/jenkins_home/.ssh/:ro \
             -v "${JENKINS_ACCOUNT_DIR}/.gitconfig":/var/jenkins_home/.gitconfig:ro \
             -v "${JENKINS_ACCOUNT_DIR}/.netrc":/var/jenkins_home/.netrc:ro \
-            $(add_extra_docker_opts) \
+            $(add_container_server_to_hosts) $(add_extra_docker_opts) \
             -d ${BUILD_PODMAN_IMAGE} '${CONTAINER_COMMAND}'"
