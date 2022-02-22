@@ -43,6 +43,12 @@ systemd_if_enabled() {
   fi
 }
 
+privileged_if_enabled() {
+  if [ -n "${PRIVILEGED_ENABLE}" ]; then
+    echo --privileged=true
+  fi
+}
+
 mount_tools_if_provided() {
  if [ -d "${TOOLS_DIR}" ]; then
    if [ -n "${TOOLS_MOUNT}" ]; then
@@ -84,6 +90,7 @@ run_ssh "podman run \
             --name "${CONTAINER_TO_RUN_NAME}" $(container_user_if_enabled) \
             --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
             --rm $(add_parent_volume_if_provided) $(systemd_if_enabled) \
+            $(privileged_if_enabled) \
             --workdir ${WORKSPACE} $(add_ports_if_provided) \
             -v "${JOB_DIR}":${WORKSPACE}:rw $(mount_tools_if_provided)\
             -v "${JENKINS_ACCOUNT_DIR}/.ssh/":/var/jenkins_home/.ssh/:ro \
