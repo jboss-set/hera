@@ -44,4 +44,8 @@ run_ssh "podman exec \
         -e MAVEN_SETTINGS_XML="${MAVEN_SETTINGS_XML}" \
         -e PULL_REQUEST_PROCESSOR_HOME="${PULL_REQUEST_PROCESSOR_HOME}" \
         -e VERSION="${VERSION}" \
+        -e VBE_EXTENSION="${VBE_EXTENSION}" \
+        -e VBE_REPOSITORY_NAMES="${VBE_REPOSITORY_NAMES}" \
+        -e VBE_CHANNELS="${VBE_CHANNELS}" \
+        -e VBE_LOG_FILE="${VBE_LOG_FILE}" \
         -ti ${CONTAINER_NAME} '${BUILD_SCRIPT}' ${@}"
