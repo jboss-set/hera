@@ -53,5 +53,9 @@ run_ssh "podman exec $(env_file_if_enabled) \
         -e BUILD_COMMAND="${BUILD_COMMAND}" \
         -e COPY_ARTIFACTS="${COPY_ARTIFACTS}" \
         -e RERUN_FAILING_TESTS="${RERUN_FAILING_TESTS}" \
+        -e VBE_EXTENSION="${VBE_EXTENSION}" \
+        -e VBE_REPOSITORY_NAMES="${VBE_REPOSITORY_NAMES}" \
+        -e VBE_CHANNELS="${VBE_CHANNELS}" \
+        -e VBE_LOG_FILE="${VBE_LOG_FILE}" \
         -ti ${CONTAINER_NAME} '${BUILD_SCRIPT}' ${@}" | removeColorsControlCharactersFromOutput
 exit "${PIPESTATUS[0]}"
