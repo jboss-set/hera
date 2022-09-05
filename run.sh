@@ -9,6 +9,7 @@ readonly JENKINS_ACCOUNT_DIR=${JENKINS_ACCOUNT_DIR:-'/home/jenkins'}
 readonly CONTAINER_USERNAME=${CONTAINER_USERNAME:-'jenkins'}
 readonly CONTAINER_UID=${CONTAINER_UID:-'1000'}
 readonly CONTAINER_GUID=${CONTAINER_GUID:-"${CONTAINER_UID}"}
+readonly CONTAINER_COMMAND="${CONTAINER_COMMAND}"
 readonly JOB_NAME=${JOB_NAME}
 readonly BUILD_ID=${BUILD_ID}
 readonly CONTAINER_SERVER_HOSTNAME=${CONTAINER_SERVER_HOSTNAME:-'olympus'}
@@ -99,7 +100,6 @@ is_defined "${CONTAINER_SERVER_IP}" 'No IP address provided for the container se
 # When running a job in parallel the workspace folder is not the same as JOB_NAME
 readonly JOB_DIR=$(echo "${WORKSPACE}" | sed -e "s;/var/jenkins_home/;${JENKINS_HOME_DIR};")
 readonly CONTAINER_TO_RUN_NAME=${CONTAINER_TO_RUN_NAME:-$(container_name "${JOB_NAME}" "${BUILD_ID}")}
-readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 
 # shellcheck disable=SC2016
 run_ssh "podman run \

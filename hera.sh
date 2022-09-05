@@ -5,11 +5,12 @@ export HERA_HOME
 readonly HERA_DEBUG=${HERA_DEBUG}
 export HERA_DEBUG
 readonly HERA_CMD=${1}
+readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
+export CONTAINER_COMMAND
 shift
 
 readonly HERA_SCRIPT=${HERA_HOME}/${HERA_CMD}.sh
 set -u
-
 # shellcheck source=library.sh
 source "${HERA_HOME}"/library.sh
 
