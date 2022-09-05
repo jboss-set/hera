@@ -5,7 +5,6 @@ readonly HERA_HOSTNAME=${HERA_HOSTNAME:-'podman.host'}
 readonly HERA_USERNAME=${HERA_USERNAME:-'jenkins'}
 readonly HERA_SSH_OPTIONS=${HERA_SSH_OPTIONS}
 readonly CONTAINER_NAME_PREFIX=${CONTAINER_NAME_PREFIX:-'automaton-slave'}
-readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 export TERM=${TERM:-'screen'}
 set -u
 
