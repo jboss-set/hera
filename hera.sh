@@ -1,4 +1,11 @@
 #!/bin/bash
+echo ==========
+env
+echo ==========
+# shellcheck source=library.sh
+source "${HERA_HOME}"/library.sh
+
+
 set +u
 readonly HERA_HOME=${HERA_HOME:-'./hera'}
 export HERA_HOME
@@ -11,7 +18,6 @@ shift
 
 readonly HERA_SCRIPT=${HERA_HOME}/${HERA_CMD}.sh
 set -u
-
 # shellcheck source=library.sh
 source "${HERA_HOME}"/library.sh
 
