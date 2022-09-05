@@ -12,8 +12,14 @@ dumpBuildEnv() {
   env_dump_file=${1}
 
   is_defined "${env_dump_file}" "No filename provided to store env."
-
-  env | grep -e 'WORKSPACE' -e 'JAVA_HOME' -e 'MAVEN_' -e 'PROJECT_' -e 'GIT_REPOSITORY_' | sed -e 's;^;export ;;' > "${env_dump_file}"
+  env | grep -e 'WORKSPACE' \
+             -e 'JAVA_HOME' \
+             -e 'MAVEN_' \
+             -e 'PROJECT_' \
+             -e 'GIT_REPOSITORY_' \
+             -e 'HERA_DEBUG' \
+             -e 'CONTAINER_' \
+             | sed -e 's;^;export ;;' > "${env_dump_file}"
   chmod +x "${env_dump_file}"
   if [ "${PIPESTATUS[0]}" -ne "0" ]; then
     echo "Env command failed"
