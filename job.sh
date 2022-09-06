@@ -59,5 +59,6 @@ run_ssh "podman exec $(env_file_if_enabled) \
         -e BUILD_COMMAND="${BUILD_COMMAND}" \
         -e COPY_ARTIFACTS="${COPY_ARTIFACTS}" \
         -e RERUN_FAILING_TESTS="${RERUN_FAILING_TESTS}" \
+        -u jenkins \
         -ti ${CONTAINER_NAME} '${BUILD_SCRIPT}' ${@}" | removeColorsControlCharactersFromOutput
 exit "${PIPESTATUS[0]}"
