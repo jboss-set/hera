@@ -84,6 +84,7 @@ run_ssh() {
   # shellcheck disable=SC2086,SC2029
   ssh ${ssh_options} \
       "${HERA_USERNAME}@${HERA_HOSTNAME}"\
+      -o SendEnv=CONTAINER_COMMAND \
       "${@}"
 }
 
