@@ -10,4 +10,4 @@ is_defined "${BUILD_SCRIPT}" 'No build script provided' 2
 readonly CONTAINER_NAME=$(container_name "${JOB_NAME}" "${BUILD_ID}")
 
 set +u
-run_ssh "podman inspect ${CONTAINER_NAME}" | removeColorsControlCharactersFromOutput
+run_podman "podman inspect ${CONTAINER_NAME}" | removeColorsControlCharactersFromOutput

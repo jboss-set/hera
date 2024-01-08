@@ -68,7 +68,7 @@ is_executable() {
   fi
 }
 
-run_ssh() {
+run_podman() {
   local ssh_options
 
   ssh_options="-o StrictHostKeyChecking=no ${HERA_SSH_OPTIONS}"
