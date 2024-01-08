@@ -68,7 +68,17 @@ is_executable() {
   fi
 }
 
+
+
 run_podman() {
+  if [ -n "${HERA_PODMAN_SSH}" ]; then
+    run_ssh ${@}
+  else
+    ${@}
+  fi
+}
+
+run_ssh() {
   local ssh_options
 
   ssh_options="-o StrictHostKeyChecking=no ${HERA_SSH_OPTIONS}"
