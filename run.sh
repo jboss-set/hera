@@ -21,6 +21,8 @@ readonly SYSTEMD_ENABLED=${SYSTEMD_ENABLED:-''}
 readonly CGROUP_MOUNT_ENABLED=${CGROUP_MOUNT_ENABLED:-''}
 readonly JENKINS_JOBS_VOLUME_ENABLED=${JENKINS_JOBS_VOLUME_ENABLED}
 readonly JENKINS_JOBS_VOLUME=${JENKINS_JOBS_VOLUME:-'/jenkins_jobs'}
+readonly PODMAN_CONTAINER_CPU=${PODMAN_CONTAINER_CPU:-''}
+readonly PODMAN_CONTAINER_MEMORY=${PODMAN_CONTAINER_MEMORY:-''}
 
 set -euo pipefail
 
@@ -92,6 +94,18 @@ add_instance_host_if_ansible_job() {
   fi
 }
 
+add_podman_container_cpu_limit_if_provided() {
+  if [ -n "${PODMAN_CONTAINER_CPU}" ]; then
+    echo "--cpus ${PODMAN_CONTAINER_CPU}"
+  fi
+}
+
+add_podman_container_memory_limit_if_provided() {
+  if [ -n "${PODMAN_CONTAINER_MEMORY}" ]; then
+    echo "--memory ${PODMAN_CONTAINER_MEMORY}"
+  fi
+}
+
 # shellcheck source=./library.sh
 source "${HERA_HOME}"/library.sh
 
@@ -109,7 +123,7 @@ readonly CONTAINER_COMMAND=${CONTAINER_COMMAND:-"${WORKSPACE}/hera/wait.sh"}
 
 # shellcheck disable=SC2016
 run_ssh "podman run \
-            --name "${CONTAINER_TO_RUN_NAME}" $(container_user_if_enabled) \
+            --name "${CONTAINER_TO_RUN_NAME}" $(container_user_if_enabled) $(add_podman_container_cpu_limit_if_provided) $(add_podman_container_memory_limit_if_provided) \
             --add-host=${CONTAINER_SERVER_HOSTNAME}:${CONTAINER_SERVER_IP}  \
             $(add_instance_host_if_ansible_job) \
             --rm $(add_parent_volume_if_provided) $(privileged_if_enabled) $(systemd_if_enabled) $(cgroup_mount_if_enabled) $(add_jenkins_jobs_volume_if_requested) \
