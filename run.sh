@@ -95,15 +95,15 @@ add_instance_host_if_ansible_job() {
 }
 
 add_podman_container_cpu_limit_if_provided() {
-  if [ -n "${PODMAN_CONTAINER_CPU}" ]; then
-    echo "--cpus ${PODMAN_CONTAINER_CPU}"
-  fi
+#  if [ -n "${PODMAN_CONTAINER_CPU}" ]; then
+#    echo "--cpus ${PODMAN_CONTAINER_CPU}"
+#  fi
 }
 
 add_podman_container_memory_limit_if_provided() {
-  if [ -n "${PODMAN_CONTAINER_MEMORY}" ]; then
-    echo "--memory ${PODMAN_CONTAINER_MEMORY}"
-  fi
+#  if [ -n "${PODMAN_CONTAINER_MEMORY}" ]; then
+#    echo "--memory ${PODMAN_CONTAINER_MEMORY}"
+#  fi
 }
 
 # shellcheck source=./library.sh
