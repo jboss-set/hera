@@ -90,7 +90,7 @@ container_user_if_enabled() {
 add_instance_host_if_ansible_job() {
   if [ ! -d "${TOOLS_DIR}" ]; then
     # Ansible jobs does NOT have a TOOLS_DIR, so we used that to determine if the job does, or not, require the instance host
-    echo '--add-host=instance:127.0.0.1'
+    echo '-h instance'
   fi
 }
 
